@@ -28,7 +28,7 @@ sed -n 'H;${x;s/root\sALL=(ALL)\sALL\n/&%admin\tALL=NOPASSWD: ALL\n/;p;}' /etc/s
 # Set up insecure public ssh key for vagrant user
 # (it'll be automatically used by vagrant)
 wget -P /home/vagrant https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub
-test -d /home/vagrant/ssh || mkdir /home/vagrant/.ssh
+mkdir -p /home/vagrant/.ssh
 touch /home/vagrant/.ssh/authorized_keys
 cat /home/vagrant/vagrant.pub >> /home/vagrant/.ssh/authorized_keys
 chown -R vagrant:vagrant /home/vagrant/.ssh
