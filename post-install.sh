@@ -39,7 +39,7 @@ rm /home/vagrant/vagrant.pub
 # Disable DNS lookup and speed up connection
 # by adding the following line to /etc/ssh/sshd_config :
 # UseDNS no
-sed -n 'H;${x;s/TCPKeepAlive.*?\n/&UseDNS no/;p;}' /etc/ssh/sshd_config > /etc/ssh/sshd_config.tmp && cp /etc/ssh/sshd_config.tmp /etc/ssh/sshd_config && rm /etc/ssh/sshd_config.tmp
+sed -n 'H;${x;s/TCPKeepAlive\s(yes|no)?\n/&UseDNS no\n/;p;}' /etc/ssh/sshd_config > /etc/ssh/sshd_config.tmp && cp /etc/ssh/sshd_config.tmp /etc/ssh/sshd_config && rm /etc/ssh/sshd_config.tmp
 
 # update all packages and clean up cache
 apt-get -y update && apt-get -y upgrade && apt-get -y autoremove && apt-get -y clean
