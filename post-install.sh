@@ -54,7 +54,7 @@ sed -i -e 's/TCPKeepAlive\s\+yes/&\nUseDNS no/' /etc/ssh/sshd_config
 /etc/init.d/ssh restart
 
 # Install latest virtualbox guest addititions
-cp /etc/apt/sources.list /ect/apt/sources.list.orig
+cp /etc/apt/sources.list /etc/apt/sources.list.orig
 cat << EOF >> /etc/apt/sources.list
 
 # VirtualBox Guest Additions source for automatic installation from packages
