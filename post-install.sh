@@ -19,8 +19,6 @@ then
     groupadd admin && usermod -a -G admin vagrant
 else
     echo -e '\e[01;31mNote\e[00m: vagrant user is already in the admin group'
-    read -p "Press any key..." -n1 -s
-    echo -e "\n"
 fi
 
 # install sudo
@@ -37,8 +35,6 @@ then
     sed -i -e 's/Defaults\s\+env_reset/&\nDefaults\tenv_keep\t+= "SSH_AUTH_SOCK",timestamp_timeout=0/' /etc/sudoers
 else
     echo -e '\e[01;31mNote\e[00m: Defaults\tenv_keep\t+= "SSH_AUTH_SOCK",timestamp_timeout=0 is already in /etc/sudoers'
-    read -p "Press any key..." -n1 -s
-    echo -e "\n"
 fi
 
 if ! grep -qP '^%admin\tALL=NOPASSWD: ALL' /etc/sudoers
@@ -50,8 +46,6 @@ then
     sed -i -e 's/root\s\+ALL=(ALL)\s\+ALL/&\n%admin\tALL=NOPASSWD: ALL/' /etc/sudoers
 else
     echo -e '\e[01;31mNote\e[00m: "%admin\tALL=NOPASSWD: ALL" is already in /etc/sudoers'
-    read -p "Press any key..." -n1 -s
-    echo -e "\n"
 fi
 
 /etc/init.d/sudo restart
@@ -67,8 +61,6 @@ then
     echo "$PUBKEY" >> /home/vagrant/.ssh/authorized_keys
 else
     echo -e '\e[01;31mNote\e[00m: vagrant public key already authorized'
-    read -p "Press any key..." -n1 -s
-    echo -e "\n"
 fi
 
 chown -R vagrant:vagrant /home/vagrant/.ssh
@@ -85,8 +77,6 @@ then
     sed -i -e 's/TCPKeepAlive\s\+yes/&\nUseDNS no/' /etc/ssh/sshd_config
 else
     echo -e '\e[01;31mNote\e[00m: "UseDNS no" is already in /etc/ssh/sshd_config'
-    read -p "Press any key..." -n1 -s
-    echo -e "\n"
 fi
 
 /etc/init.d/ssh restart
@@ -117,8 +107,6 @@ blacklist pcspkr
 EOF
 else
     echo -e '\e[01;31mNote\e[00m: "blacklist pcspkr" is already in /etc/modprobe.d/blacklist.conf'
-    read -p "Press any key..." -n1 -s
-    echo -e "\n"
 fi
 
 if ! grep -qP '^GRUB_TIMEOUT=0' /etc/default/grub
@@ -129,10 +117,6 @@ then
     update-grub
 else
     echo -e '\e[01;31mNote\e[00m: GRUB_TIMEOUT already set to 0 in /etc/default/grub'
-    read -p "Press any key..." -n1 -s
-    echo -e "\n"
 fi
 
-echo -e '\e[01;31mRebooting now. Press any key to continue or Ctrl-C to abort...\e[00m'
-read -n1 -s
-shutdown -r now
+echo -e '\e[01;31mPlease reboot now\e[00m'
