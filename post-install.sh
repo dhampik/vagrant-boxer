@@ -103,7 +103,11 @@ fi
 # remove not needed packages and clean aptitude cache
 apt-get -y autoremove && apt-get -y clean
 
-if ! grep -qP '^blacklist pcspkr' /etc/modprobe.d/blacklist.conf
+if [ ! -f /etc/modprobe.d/blacklist.conf ];
+then
+    # if there is no global blacklist.conf
+    echo "blacklist pcspkr" > /etc/modprobe.d/pcspkr.conf
+elif ! grep -qP '^blacklist pcspkr' /etc/modprobe.d/blacklist.conf
 then
     # blacklist pcspkr to avoid error msg on startup
     cp /etc/modprobe.d/blacklist.conf /etc/modprobe.d/blacklist.conf.orig
