@@ -24,6 +24,12 @@ fi
 # install sudo
 apt-get -y --no-install-recommends install sudo
 
+# install openssh-server (in case someone missed that)
+if [ ! -f /etc/ssh/sshd_config ];
+then
+    apt-get -y --no-install-recommends install openssh-server
+fi
+
 if ! grep -qP '^Defaults\tenv_keep\t\+= "SSH_AUTH_SOCK",timestamp_timeout=0' /etc/sudoers
 then
     # Retain SSH_AUTH_SOCK to use sudo with ssh agend
@@ -118,5 +124,8 @@ then
 else
     echo -e '\e[01;31mNote\e[00m: GRUB_TIMEOUT already set to 0 in /etc/default/grub'
 fi
+
+# clear history
+history -c
 
 echo -e '\e[01;31mPlease reboot now\e[00m'
