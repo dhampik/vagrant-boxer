@@ -10,7 +10,7 @@ I prefer to use [Debian](http://debian.org/ "Visit Debian website") for servers,
 
 First, you need to install [VirtualBox](https://www.virtualbox.org/ "Visit virtualbox website") to make things happen.
 
-Then you need to download debian installer iso, e.g [debian-squeeze-i386-6.0.7-netinst](http://cdimage.debian.org/debian-cd/6.0.7/i386/iso-cd/debian-6.0.7-i386-netinst.iso "Download netinst debian iso") which was used here.
+Then you need to download debian installer iso, e.g [debian-7.1.0-i386-netinst.iso](http://cdimage.debian.org/debian-cd/7.1.0/i386/iso-cd/debian-7.1.0-i386-netinst.iso "Download netinst debian iso") which was used here.
 
 ###The following settings were used:###
 - RAM size 384 MB

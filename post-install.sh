@@ -24,6 +24,12 @@ fi
 # install sudo
 apt-get -y --no-install-recommends install sudo
 
+# install openssh-server (in case someone missed that)
+if [ ! -f /etc/ssh/sshd_config ];
+then
+    apt-get -y --no-install-recommends install openssh-server
+fi
+
 if ! grep -qP '^Defaults\tenv_keep\t\+= "SSH_AUTH_SOCK",timestamp_timeout=0' /etc/sudoers
 then
     # Retain SSH_AUTH_SOCK to use sudo with ssh agend
@@ -97,7 +103,11 @@ fi
 # remove not needed packages and clean aptitude cache
 apt-get -y autoremove && apt-get -y clean
 
-if ! grep -qP '^blacklist pcspkr' /etc/modprobe.d/blacklist.conf
+if [ ! -f /etc/modprobe.d/blacklist.conf ];
+then
+    # if there is no global blacklist.conf
+    echo "blacklist pcspkr" > /etc/modprobe.d/pcspkr.conf
+elif ! grep -qP '^blacklist pcspkr' /etc/modprobe.d/blacklist.conf
 then
     # blacklist pcspkr to avoid error msg on startup
     cp /etc/modprobe.d/blacklist.conf /etc/modprobe.d/blacklist.conf.orig
@@ -118,5 +128,8 @@ then
 else
     echo -e '\e[01;31mNote\e[00m: GRUB_TIMEOUT already set to 0 in /etc/default/grub'
 fi
+
+# clear history
+history -c
 
 echo -e '\e[01;31mPlease reboot now\e[00m'
