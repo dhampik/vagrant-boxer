@@ -2,6 +2,7 @@ vagrant-boxer
 =============
 
 This project devoted to simplified process of custom vagrant box configuration.
+**Update:** it's probably better to use [veewee](https://github.com/jedi4ever/veewee). When I didn't know about it when I made this project. Leaving the repo just in case.
 
 Guest system installation
 -------------------------
